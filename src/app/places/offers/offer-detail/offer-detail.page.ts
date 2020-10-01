@@ -5,18 +5,18 @@ import { Place } from 'src/app/models/place.model';
 import { PlacesService } from '../../places.service';
 
 @Component({
-  selector: 'app-edit-offer',
-  templateUrl: './edit-offer.page.html',
-  styleUrls: ['./edit-offer.page.scss'],
+  selector: 'app-offer-detail',
+  templateUrl: './offer-detail.page.html',
+  styleUrls: ['./offer-detail.page.scss'],
 })
-export class EditOfferPage implements OnInit {
-
+export class OfferDetailPage implements OnInit {
   place: Place;
 
-  constructor(private route: ActivatedRoute, private placesService: PlacesService, private navCtrl: NavController) { }
+  constructor(private navCtrl: NavController,private route: ActivatedRoute, private placesService: PlacesService) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(paramMap => {
+      console.log(paramMap);
       if (!paramMap.has('placeId')) {
         this.navCtrl.navigateBack('/places/offers');
         return;
@@ -24,5 +24,4 @@ export class EditOfferPage implements OnInit {
       this.place = this.placesService.getplace(paramMap.get('placeId'));
     });
   }
-
 }
